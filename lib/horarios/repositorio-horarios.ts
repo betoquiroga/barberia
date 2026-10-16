@@ -183,7 +183,14 @@ function cliente() {
   return crearCliente(entorno);
 }
 
-function columnas(entrada: EntradaHorario) {
+type ColumnasHorario = {
+  dia: DiaSemana;
+  cerrado: boolean;
+  abre: string | null;
+  cierra: string | null;
+};
+
+function columnas(entrada: EntradaHorario): ColumnasHorario {
   if (entrada.cerrado) {
     return { dia: entrada.dia, cerrado: true, abre: null, cierra: null };
   }
