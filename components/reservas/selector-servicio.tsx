@@ -1,8 +1,7 @@
 import { claseCampo, claseError } from "@/lib/ui/clases";
-import type { Servicio } from "@/types/servicio";
 
 type SelectorServicioProps = {
-  servicios: Servicio[];
+  servicios: { id: string; nombre: string }[];
   valor: string;
   error?: string;
   deshabilitado: boolean;

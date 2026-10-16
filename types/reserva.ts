@@ -1,5 +1,6 @@
 export type ValoresReserva = {
   nombre: string;
+  correo: string;
   telefono: string;
   servicioId: string;
   fecha: string;
@@ -8,7 +9,10 @@ export type ValoresReserva = {
 };
 
 export type ErroresReserva = Partial<
-  Record<"nombre" | "telefono" | "servicioId" | "fecha" | "hora" | "nota", string>
+  Record<
+    "nombre" | "correo" | "telefono" | "servicioId" | "fecha" | "hora" | "nota",
+    string
+  >
 >;
 
 export type ResultadoValidacionReserva =

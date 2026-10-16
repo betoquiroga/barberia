@@ -1,8 +1,8 @@
 import { TarjetaServicio } from "@/components/landing/tarjeta-servicio";
-import type { Servicio } from "@/types/servicio";
+import type { EstiloPublico } from "@/types/catalogo-servicio";
 
 type ListaServiciosProps = {
-  servicios: Servicio[];
+  servicios: EstiloPublico[];
 };
 
 export function ListaServicios({ servicios }: ListaServiciosProps) {

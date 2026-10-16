@@ -42,7 +42,7 @@ function estadoAlta(error: ErrorAltaCita): number {
     return 400;
   }
 
-  if (error === "correo_no_enviado") {
+  if (error === "correo_no_enviado" || error === "pago_no_creado") {
     return 502;
   }
 

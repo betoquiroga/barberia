@@ -10,7 +10,7 @@ type CampoReservaProps = {
 } & (
   | {
       control: "input";
-      type: "text" | "tel" | "date" | "time";
+      type: "text" | "email" | "tel" | "date" | "time";
       required: boolean;
       maxLength?: number;
     }

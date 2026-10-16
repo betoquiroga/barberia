@@ -4,17 +4,21 @@ import { useState, type FormEvent } from "react";
 import { CampoReserva } from "@/components/reservas/campo-reserva";
 import { MensajeReserva } from "@/components/reservas/mensaje-reserva";
 import { SelectorServicio } from "@/components/reservas/selector-servicio";
+import { mensajeErrorAlta } from "@/lib/citas/mensajes-error-alta";
+import { enviarAltaCita } from "@/lib/citas/servicio-alta-cita";
+import { obtenerPago } from "@/lib/pagos/servicio-pago";
 import { validarReserva } from "@/lib/reservas/validar-reserva";
 import { claseBotonPrincipal } from "@/lib/ui/clases";
+import type { EntradaAltaCita } from "@/types/cita-alta";
 import type { ErroresReserva, ValoresReserva } from "@/types/reserva";
-import type { Servicio } from "@/types/servicio";
 
 type FormularioReservaProps = {
-  servicios: Servicio[];
+  servicios: { id: string; nombre: string }[];
 };
 
 const valoresVacios: ValoresReserva = {
   nombre: "",
+  correo: "",
   telefono: "",
   servicioId: "",
   fecha: "",
@@ -22,19 +26,44 @@ const valoresVacios: ValoresReserva = {
   nota: "",
 };
 
+function entradaAlta(valores: ValoresReserva): EntradaAltaCita {
+  return {
+    nombre: valores.nombre.trim(),
+    correo: valores.correo.trim().toLowerCase(),
+    telefono: valores.telefono.trim(),
+    servicioId: valores.servicioId,
+    fecha: valores.fecha,
+    hora: valores.hora,
+    nota: valores.nota.trim(),
+  };
+}
+
+function esUrlAbsoluta(valor: string): boolean {
+  try {
+    const url = new URL(valor);
+    return url.protocol === "http:" || url.protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 export function FormularioReserva({ servicios }: FormularioReservaProps) {
   const [valores, setValores] = useState<ValoresReserva>(valoresVacios);
   const [errores, setErrores] = useState<ErroresReserva>({});
   const [intento, setIntento] = useState(false);
-  const [confirmacion, setConfirmacion] = useState<string | null>(null);
-  const [reservando, setReservando] = useState(false);
+  const [errorAlta, setErrorAlta] = useState<string | null>(null);
+  const [enviando, setEnviando] = useState(false);
 
   function actualizar(campo: keyof ValoresReserva, valor: string) {
     const siguientes = { ...valores, [campo]: valor };
 
     setValores(siguientes);
-    setReservando(false);
-    setConfirmacion(null);
+
+    if (enviando) {
+      return;
+    }
+
+    setErrorAlta(null);
 
     if (!intento) {
       return;
@@ -44,7 +73,7 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
     setErrores(resultado.ok ? {} : resultado.errores);
   }
 
-  function enviar(evento: FormEvent<HTMLFormElement>) {
+  async function enviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
     setIntento(true);
 
@@ -52,29 +81,55 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
 
     if (!resultado.ok) {
       setErrores(resultado.errores);
-      setConfirmacion(null);
-      setReservando(false);
+      setErrorAlta(null);
       return;
     }
 
-    const servicio = servicios.find(
-      (item) => item.id === valores.servicioId,
-    );
-
     setErrores({});
-    setIntento(false);
-    setValores(valoresVacios);
-    setReservando(true);
-    setConfirmacion(
-      `Listo. Anotamos tu cita en esta pantalla. Aún no queda guardada. ${servicio?.nombre ?? ""}, ${valores.fecha}, ${valores.hora}.`,
-    );
+    setErrorAlta(null);
+    setEnviando(true);
+
+    const alta = await enviarAltaCita(entradaAlta(valores));
+
+    if (alta.ok) {
+      if (
+        alta.cita.pago.estado === "pendiente" &&
+        esUrlAbsoluta(alta.cita.pago.url_pasarela)
+      ) {
+        window.location.assign(alta.cita.pago.url_pasarela);
+        return;
+      }
+
+      setErrorAlta(mensajeErrorAlta("supabase_inalcanzable"));
+      setEnviando(false);
+      return;
+    }
+
+    if (alta.error === "correo_no_enviado") {
+      const pago = await obtenerPago(alta.pago_id);
+
+      if (
+        pago.ok &&
+        pago.pago.estado === "pendiente" &&
+        typeof pago.pago.url_pasarela === "string" &&
+        pago.pago.url_pasarela.length > 0
+      ) {
+        window.location.assign(pago.pago.url_pasarela);
+        return;
+      }
+
+      setErrorAlta(mensajeErrorAlta("correo_no_enviado"));
+      setEnviando(false);
+      return;
+    }
+
+    setErrorAlta(mensajeErrorAlta(alta.error));
+    setEnviando(false);
   }
 
   return (
     <form className="mt-6 flex flex-col gap-4" noValidate onSubmit={enviar}>
-      {confirmacion ? (
-        <MensajeReserva tipo="confirmacion" texto={confirmacion} />
-      ) : null}
+      {errorAlta ? <MensajeReserva tipo="error" texto={errorAlta} /> : null}
       <CampoReserva
         control="input"
         id="reserva-nombre"
@@ -84,8 +139,20 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
         maxLength={120}
         valor={valores.nombre}
         error={errores.nombre}
-        deshabilitado={false}
+        deshabilitado={enviando}
         onChange={(valor) => actualizar("nombre", valor)}
+      />
+      <CampoReserva
+        control="input"
+        id="reserva-correo"
+        etiqueta="Correo"
+        type="email"
+        required
+        maxLength={254}
+        valor={valores.correo}
+        error={errores.correo}
+        deshabilitado={enviando}
+        onChange={(valor) => actualizar("correo", valor)}
       />
       <CampoReserva
         control="input"
@@ -96,14 +163,14 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
         maxLength={20}
         valor={valores.telefono}
         error={errores.telefono}
-        deshabilitado={false}
+        deshabilitado={enviando}
         onChange={(valor) => actualizar("telefono", valor)}
       />
       <SelectorServicio
         servicios={servicios}
         valor={valores.servicioId}
         error={errores.servicioId}
-        deshabilitado={false}
+        deshabilitado={enviando}
         onChange={(valor) => actualizar("servicioId", valor)}
       />
       <CampoReserva
@@ -114,7 +181,7 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
         required
         valor={valores.fecha}
         error={errores.fecha}
-        deshabilitado={false}
+        deshabilitado={enviando}
         onChange={(valor) => actualizar("fecha", valor)}
       />
       <CampoReserva
@@ -125,7 +192,7 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
         required
         valor={valores.hora}
         error={errores.hora}
-        deshabilitado={false}
+        deshabilitado={enviando}
         onChange={(valor) => actualizar("hora", valor)}
       />
       <CampoReserva
@@ -136,15 +203,11 @@ export function FormularioReserva({ servicios }: FormularioReservaProps) {
         rows={3}
         valor={valores.nota}
         error={errores.nota}
-        deshabilitado={false}
+        deshabilitado={enviando}
         onChange={(valor) => actualizar("nota", valor)}
       />
-      <button
-        type="submit"
-        className={claseBotonPrincipal}
-        disabled={reservando}
-      >
-        {reservando ? "Reservando…" : "Reservar"}
+      <button type="submit" className={claseBotonPrincipal} disabled={enviando}>
+        {enviando ? "Agendando…" : "Agendar y pagar"}
       </button>
     </form>
   );

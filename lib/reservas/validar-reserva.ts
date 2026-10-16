@@ -1,4 +1,3 @@
-import type { Servicio } from "@/types/servicio";
 import type {
   ErroresReserva,
   ResultadoValidacionReserva,
@@ -6,15 +5,17 @@ import type {
 } from "@/types/reserva";
 
 const telefonoPermitido = /^[0-9+\- ]+$/;
+const correoPermitido = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const fechaIso = /^(\d{4})-(\d{2})-(\d{2})$/;
 const hora24 = /^([01]\d|2[0-3]):([0-5]\d)$/;
 
-function hoyLocal(): string {
-  const ahora = new Date();
-  const mes = String(ahora.getMonth() + 1).padStart(2, "0");
-  const dia = String(ahora.getDate()).padStart(2, "0");
-
-  return `${ahora.getFullYear()}-${mes}-${dia}`;
+function hoyLima(): string {
+  return new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Lima",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(new Date());
 }
 
 function fechaValida(fecha: string): boolean {
@@ -33,21 +34,26 @@ function fechaValida(fecha: string): boolean {
     interpretada.getFullYear() === anio &&
     interpretada.getMonth() === mes - 1 &&
     interpretada.getDate() === dia &&
-    fecha >= hoyLocal()
+    fecha >= hoyLima()
   );
 }
 
 export function validarReserva(
   valores: ValoresReserva,
-  servicios: Servicio[],
+  servicios: { id: string }[],
 ): ResultadoValidacionReserva {
   const nombre = valores.nombre.trim();
+  const correo = valores.correo.trim().toLowerCase();
   const telefono = valores.telefono.trim();
   const nota = valores.nota.trim();
   const errores: ErroresReserva = {};
 
   if (nombre.length < 1 || nombre.length > 120) {
     errores.nombre = "Escribe un nombre de 1 a 120 caracteres.";
+  }
+
+  if (correo.length < 1 || correo.length > 254 || !correoPermitido.test(correo)) {
+    errores.correo = "Escribe un correo válido de hasta 254 caracteres.";
   }
 
   if (
