@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Barbería",
-  description: "Corte y arreglo de barba. Consulta servicios y horario de atención.",
+  description: "Corte y arreglo de barba. Consulta servicios, tarifas y horario de atención.",
   themeColor: "#09090b",
 };
 
