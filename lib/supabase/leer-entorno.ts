@@ -1,4 +1,4 @@
-const URL_PROYECTO = "https://gtzbxiiunbehowfayelc.supabase.co";
+const URL_PROYECTO = "https://krpyyghflgcxhmscvemw.supabase.co";
 
 export type EntornoSupabase = {
   url: string;

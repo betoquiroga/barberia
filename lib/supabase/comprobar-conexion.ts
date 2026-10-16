@@ -2,7 +2,7 @@ import { crearCliente } from "@/lib/supabase/crear-cliente";
 import { leerEntorno } from "@/lib/supabase/leer-entorno";
 import type { ResultadoConexionSupabase } from "@/types/supabase-conexion";
 
-const PROYECTO = "gtzbxiiunbehowfayelc" as const;
+const PROYECTO = "krpyyghflgcxhmscvemw" as const;
 
 export async function comprobarConexion(): Promise<ResultadoConexionSupabase> {
   const entorno = leerEntorno();

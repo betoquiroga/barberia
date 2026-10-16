@@ -5,7 +5,7 @@ export type ErrorConexionSupabase =
 
 export type ConexionSupabaseOk = {
   ok: true;
-  proyecto: "gtzbxiiunbehowfayelc";
+  proyecto: "krpyyghflgcxhmscvemw";
 };
 
 export type ConexionSupabaseFallo = {
