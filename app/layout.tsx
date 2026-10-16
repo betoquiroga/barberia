@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hola EDteam",
-  description: "Hola EDteam",
+  title: "Barbería",
+  description: "Corte y arreglo de barba. Consulta servicios y horario de atención.",
   themeColor: "#09090b",
 };
 

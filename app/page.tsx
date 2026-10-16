@@ -1,9 +1,13 @@
-import { HolaEdteam } from "@/components/hola-edteam/hola-edteam";
+import { Landing } from "@/components/landing/landing";
+import { listarHorarios } from "@/lib/horarios/repositorio-horarios";
+import { serviciosLanding } from "@/lib/landing/servicios";
 
-export default function Home() {
+export default async function Home() {
+  const resultado = await listarHorarios();
+
   return (
-    <main className="flex min-h-dvh items-center justify-center bg-zinc-950 text-zinc-50">
-      <HolaEdteam text="Hola EDteam" />
+    <main className="min-h-dvh bg-zinc-950 text-zinc-50">
+      <Landing servicios={serviciosLanding} resultado={resultado} />
     </main>
   );
 }
