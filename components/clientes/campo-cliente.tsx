@@ -19,7 +19,7 @@ type CampoClienteProps = {
 );
 
 const clase =
-  "w-full rounded border border-zinc-300 px-3 py-2 text-sm disabled:bg-zinc-100";
+  "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-50 disabled:bg-zinc-800 disabled:opacity-50";
 
 export function CampoCliente(props: CampoClienteProps) {
   return (

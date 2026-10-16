@@ -82,7 +82,7 @@ export function FormularioCliente({
       <div className="flex gap-2">
         <button
           type="submit"
-          className="rounded bg-zinc-950 px-4 py-2 text-sm text-white disabled:opacity-50"
+          className="rounded bg-zinc-50 px-4 py-2 text-sm text-zinc-950 disabled:opacity-50"
           disabled={bloqueado}
         >
           {enviando ? "Guardando…" : editando ? "Actualizar" : "Guardar"}
@@ -90,7 +90,7 @@ export function FormularioCliente({
         {editando ? (
           <button
             type="button"
-            className="rounded border border-zinc-300 px-4 py-2 text-sm disabled:opacity-50"
+            className="rounded border border-zinc-700 px-4 py-2 text-sm disabled:opacity-50"
             disabled={bloqueado}
             onClick={onCancelar}
           >

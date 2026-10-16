@@ -164,7 +164,7 @@ export function PanelClientes() {
           <MensajeCliente tipo="error" texto={errorCarga} />
           <button
             type="button"
-            className="rounded border border-zinc-300 px-3 py-1 text-sm"
+            className="rounded border border-zinc-700 px-3 py-1 text-sm"
             onClick={() => {
               void cargar();
             }}
