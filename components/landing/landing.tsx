@@ -18,7 +18,7 @@ export function Landing({ servicios, resultado }: LandingProps) {
       <HeroLanding />
       <ListaServicios servicios={servicios} />
       <SeccionHorarios resultado={resultado} />
-      <SeccionReserva />
+      <SeccionReserva servicios={servicios} />
     </>
   );
 }
