@@ -5,5 +5,5 @@ type PrecioServicioProps = {
 };
 
 export function PrecioServicio({ precio }: PrecioServicioProps) {
-  return <p className="mt-3 text-base font-semibold text-zinc-50">{presentarPesos(precio)}</p>;
+  return <p className="mt-3 text-base font-semibold text-acento">{presentarPesos(precio)}</p>;
 }

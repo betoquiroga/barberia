@@ -2,9 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { mesAnterior, mesSiguiente } from "@/lib/desempeno/mover-mes";
+import { claseBotonSecundario, claseCampo } from "@/lib/ui/clases";
 
 const MES = /^\d{4}-(0[1-9]|1[0-2])$/;
-const CLASE_CONTROL = "rounded border border-zinc-700 px-3 py-1 text-sm";
 
 type SelectorMesProps = {
   mesConfirmado?: string;
@@ -31,7 +31,7 @@ export function SelectorMes({
         Mes
         <input
           type="month"
-          className={CLASE_CONTROL}
+          className={claseCampo}
           value={mesConfirmado ?? mesConsulta ?? ""}
           onChange={(evento) => {
             const valor = evento.target.value;
@@ -44,7 +44,7 @@ export function SelectorMes({
       </label>
       <button
         type="button"
-        className={`${CLASE_CONTROL} disabled:opacity-50`}
+        className={claseBotonSecundario}
         disabled={!anterior}
         onClick={() => {
           if (anterior) {
@@ -56,7 +56,7 @@ export function SelectorMes({
       </button>
       <button
         type="button"
-        className={`${CLASE_CONTROL} disabled:opacity-50`}
+        className={claseBotonSecundario}
         disabled={!siguiente}
         onClick={() => {
           if (siguiente) {

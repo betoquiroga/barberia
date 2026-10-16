@@ -1,7 +1,9 @@
+import { claseEnlace } from "@/lib/ui/clases";
+
 export function EnlaceServicios() {
   return (
     <a
-      className="text-sm text-zinc-300 hover:text-zinc-50"
+      className={claseEnlace}
       href="/servicios-ofrecidos"
     >
       Servicios

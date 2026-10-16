@@ -1,3 +1,5 @@
+import { claseError, claseExito } from "@/lib/ui/clases";
+
 type MensajeServicioProps = {
   tipo: "error" | "exito";
   texto: string;
@@ -5,7 +7,7 @@ type MensajeServicioProps = {
 
 export function MensajeServicio({ tipo, texto }: MensajeServicioProps) {
   const clase =
-    tipo === "error" ? "text-sm text-red-400" : "text-sm text-green-400";
+    tipo === "error" ? claseError : claseExito;
 
   return <p className={clase}>{texto}</p>;
 }

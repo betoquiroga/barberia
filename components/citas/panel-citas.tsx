@@ -7,6 +7,7 @@ import { MensajeCitas } from "@/components/citas/mensaje-citas";
 import { SelectorMes } from "@/components/desempeno/selector-mes";
 import { mensajeErrorDesempeno } from "@/lib/desempeno/mensajes-error-desempeno";
 import { leerDiagramaCitasCliente } from "@/lib/citas/servicio-citas-diagrama";
+import { claseBotonSecundario } from "@/lib/ui/clases";
 import type {
   DiaCitas,
   ErrorCitasDiagrama,
@@ -75,7 +76,7 @@ export function PanelCitas({ mes }: PanelCitasProps) {
           <MensajeCitas texto={mensajeErrorDesempeno(error)} />
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={() => setIntento((valor) => valor + 1)}
           >
             Reintentar

@@ -7,6 +7,7 @@ import type { ValoresFormularioServicio } from "@/components/servicios-ofrecidos
 import { ListaServicios } from "@/components/servicios-ofrecidos/lista-servicios";
 import { MensajeServicio } from "@/components/servicios-ofrecidos/mensaje-servicio";
 import { mensajeErrorServicioOfrecido } from "@/lib/servicios-ofrecidos/mensajes-error-servicio-ofrecido";
+import { claseBotonSecundario } from "@/lib/ui/clases";
 import {
   actualizarServicioOfrecido,
   borrarServicioOfrecido,
@@ -218,7 +219,7 @@ export function PanelServicios() {
           <MensajeServicio tipo="error" texto={errorServidores} />
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={() => {
               void cargarServidores();
             }}
@@ -234,7 +235,7 @@ export function PanelServicios() {
           <MensajeServicio tipo="error" texto={errorCarga} />
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={() => {
               void cargarTodo();
             }}

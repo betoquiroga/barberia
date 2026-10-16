@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { PanelDesempeno } from "@/components/desempeno/panel-desempeno";
+import { clasePagina } from "@/lib/ui/clases";
 
 type PaginaDesempenoProps = {
   searchParams: Promise<{ mes?: string | string[] }>;
@@ -9,7 +10,7 @@ export default function PaginaDesempeno({
   searchParams,
 }: PaginaDesempenoProps) {
   return (
-    <main className="min-h-dvh bg-zinc-950 text-zinc-50">
+    <main className={clasePagina}>
       <div className="mx-auto max-w-3xl px-4 py-8">
         <Suspense fallback={<p>Cargando desempeño…</p>}>
           <ContenidoDesempeno searchParams={searchParams} />

@@ -14,7 +14,7 @@ export function TablaDesempeno({ filas, mes }: TablaDesempenoProps) {
   return (
     <table className="w-full text-left text-sm">
       <thead>
-        <tr className="border-b border-zinc-700">
+        <tr className="border-b border-borde">
           <th className="py-2 pr-3 font-medium">Barbero</th>
           <th className="py-2 pr-3 font-medium">Completadas</th>
           <th className="py-2 pr-3 font-medium">Canceladas</th>

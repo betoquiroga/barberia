@@ -1,3 +1,5 @@
+import { claseCampo } from "@/lib/ui/clases";
+
 type CampoClienteProps = {
   id: string;
   etiqueta: string;
@@ -18,9 +20,6 @@ type CampoClienteProps = {
     }
 );
 
-const clase =
-  "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-50 disabled:bg-zinc-800 disabled:opacity-50";
-
 export function CampoCliente(props: CampoClienteProps) {
   return (
     <label className="flex flex-col gap-1 text-sm" htmlFor={props.id}>
@@ -29,7 +28,7 @@ export function CampoCliente(props: CampoClienteProps) {
         <textarea
           id={props.id}
           name={props.id}
-          className={clase}
+          className={claseCampo}
           maxLength={props.maxLength}
           rows={props.rows}
           value={props.valor}
@@ -40,7 +39,7 @@ export function CampoCliente(props: CampoClienteProps) {
         <input
           id={props.id}
           name={props.id}
-          className={clase}
+          className={claseCampo}
           type={props.type}
           required={props.required}
           maxLength={props.maxLength}

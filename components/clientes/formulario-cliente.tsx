@@ -1,4 +1,8 @@
 import { CampoCliente } from "@/components/clientes/campo-cliente";
+import {
+  claseBotonPrincipal,
+  claseBotonSecundarioGrande,
+} from "@/lib/ui/clases";
 
 export type ValoresFormularioCliente = {
   nombre: string;
@@ -82,7 +86,7 @@ export function FormularioCliente({
       <div className="flex gap-2">
         <button
           type="submit"
-          className="rounded bg-zinc-50 px-4 py-2 text-sm text-zinc-950 disabled:opacity-50"
+          className={claseBotonPrincipal}
           disabled={bloqueado}
         >
           {enviando ? "Guardando…" : editando ? "Actualizar" : "Guardar"}
@@ -90,7 +94,7 @@ export function FormularioCliente({
         {editando ? (
           <button
             type="button"
-            className="rounded border border-zinc-700 px-4 py-2 text-sm disabled:opacity-50"
+            className={claseBotonSecundarioGrande}
             disabled={bloqueado}
             onClick={onCancelar}
           >

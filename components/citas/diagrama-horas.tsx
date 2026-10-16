@@ -1,6 +1,7 @@
 import { FilaBarra } from "@/components/citas/fila-barra";
 import { claseBarra } from "@/lib/citas/clase-barra";
 import { presentarHora } from "@/lib/citas/presentar-eje";
+import { claseBarraHora, claseBarraPico } from "@/lib/ui/clases";
 import type { HoraCitas, HorarioPico } from "@/types/citas-diagrama";
 
 type DiagramaHorasProps = {
@@ -31,7 +32,7 @@ export function DiagramaHoras({ horas, horarioPico }: DiagramaHorasProps) {
               cantidad={hora.cantidad}
               ancho={claseBarra(hora.cantidad, maximo)}
               color={
-                horarioPico?.hora === hora.hora ? "bg-zinc-50" : "bg-zinc-400"
+                horarioPico?.hora === hora.hora ? claseBarraPico : claseBarraHora
               }
             />
           </li>

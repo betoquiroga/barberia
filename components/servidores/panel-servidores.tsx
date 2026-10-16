@@ -7,6 +7,7 @@ import type { ValoresFormularioServidor } from "@/components/servidores/formular
 import { ListaServidores } from "@/components/servidores/lista-servidores";
 import { MensajeServidor } from "@/components/servidores/mensaje-servidor";
 import { mensajeErrorServidor } from "@/lib/servidores/mensajes-error-servidor";
+import { claseBotonSecundario } from "@/lib/ui/clases";
 import {
   actualizarServidor,
   borrarServidor,
@@ -165,7 +166,7 @@ export function PanelServidores() {
           <MensajeServidor tipo="error" texto={errorCarga} />
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={() => {
               void cargar();
             }}

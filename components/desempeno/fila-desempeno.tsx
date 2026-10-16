@@ -1,4 +1,5 @@
 import { presentarSoles } from "@/lib/desempeno/presentar-montos";
+import { claseEnlace, claseTextoSuave } from "@/lib/ui/clases";
 import type { FilaDesempeno as DatosFila } from "@/types/desempeno";
 
 type FilaDesempenoProps = {
@@ -8,16 +9,16 @@ type FilaDesempenoProps = {
 
 export function FilaDesempeno({ fila, mes }: FilaDesempenoProps) {
   return (
-    <tr className="border-b border-zinc-800">
+    <tr className="border-b border-borde">
       <td className="py-2 pr-3">
         <a
-          className="hover:text-zinc-300"
+          className={claseEnlace}
           href={`/desempeno/${fila.barbero_id}?mes=${mes}`}
         >
           {fila.nombre}
         </a>
         {fila.activo ? null : (
-          <span className="text-zinc-400"> Inactivo</span>
+          <span className={claseTextoSuave}> Inactivo</span>
         )}
       </td>
       <td className="py-2 pr-3">{fila.citas_completadas}</td>

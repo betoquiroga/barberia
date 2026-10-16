@@ -5,6 +5,7 @@ import { FichaBarbero } from "@/components/desempeno/ficha-barbero";
 import { MensajeDesempeno } from "@/components/desempeno/mensaje-desempeno";
 import { SelectorMes } from "@/components/desempeno/selector-mes";
 import { mensajeErrorDesempeno } from "@/lib/desempeno/mensajes-error-desempeno";
+import { claseBotonSecundario, claseEnlace } from "@/lib/ui/clases";
 import { leerDesempenoBarbero } from "@/lib/desempeno/servicio-desempeno";
 import type { ErrorDesempeno, FilaDesempeno } from "@/types/desempeno";
 
@@ -78,13 +79,13 @@ export function PanelBarbero({ barberoId, mes }: PanelBarberoProps) {
         <div className="flex flex-col items-start gap-2">
           <MensajeDesempeno texto={mensajeErrorDesempeno(error)} />
           {error === "no_encontrado" ? (
-            <a className="text-sm hover:text-zinc-300" href={vuelta}>
+            <a className={claseEnlace} href={vuelta}>
               Volver al mes
             </a>
           ) : null}
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={reintentar}
           >
             Reintentar

@@ -6,6 +6,7 @@ import { ResumenMes } from "@/components/desempeno/resumen-mes";
 import { SelectorMes } from "@/components/desempeno/selector-mes";
 import { TablaDesempeno } from "@/components/desempeno/tabla-desempeno";
 import { mensajeErrorDesempeno } from "@/lib/desempeno/mensajes-error-desempeno";
+import { claseBotonSecundario } from "@/lib/ui/clases";
 import { resumirFilas } from "@/lib/desempeno/resumir-filas";
 import { listarDesempeno } from "@/lib/desempeno/servicio-desempeno";
 import type { ErrorDesempeno, FilaDesempeno } from "@/types/desempeno";
@@ -61,7 +62,7 @@ export function PanelDesempeno({ mes }: PanelDesempenoProps) {
           <MensajeDesempeno texto={mensajeErrorDesempeno(error)} />
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={() => {
               setCargando(true);
               void listarDesempeno(mes).then((resultado) => {

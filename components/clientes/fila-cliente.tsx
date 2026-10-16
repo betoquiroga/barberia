@@ -1,3 +1,9 @@
+import {
+  claseBotonSecundario,
+  claseFila,
+  claseFilaEdicion,
+  claseTextoSuave,
+} from "@/lib/ui/clases";
 import type { Cliente } from "@/types/cliente";
 
 type FilaClienteProps = {
@@ -19,16 +25,16 @@ export function FilaCliente({
 
   return (
     <li
-      className={`flex flex-col gap-1 border-b border-zinc-800 py-3 ${editando ? "ring-1 ring-zinc-600" : ""}`}
+      className={`${claseFila}${editando ? ` ${claseFilaEdicion}` : ""}`}
     >
       <p className="font-bold">{cliente.nombre}</p>
-      <p className="text-zinc-400">{cliente.correo}</p>
-      <p className="text-zinc-400">{cliente.telefono}</p>
-      <p className="text-zinc-400">{detalle}</p>
+      <p className={claseTextoSuave}>{cliente.correo}</p>
+      <p className={claseTextoSuave}>{cliente.telefono}</p>
+      <p className={claseTextoSuave}>{detalle}</p>
       <div className="flex gap-2 pt-1">
         <button
           type="button"
-          className="rounded border border-zinc-700 px-3 py-1 text-sm disabled:opacity-50"
+          className={claseBotonSecundario}
           disabled={borrando}
           onClick={() => onEditar(cliente)}
         >
@@ -36,7 +42,7 @@ export function FilaCliente({
         </button>
         <button
           type="button"
-          className="rounded border border-zinc-700 px-3 py-1 text-sm disabled:opacity-50"
+          className={claseBotonSecundario}
           disabled={borrando}
           onClick={() => onBorrar(cliente)}
         >

@@ -1,4 +1,5 @@
 import type { FilaPresentada } from "@/lib/landing/presentar-horarios";
+import { claseTextoSuave } from "@/lib/ui/clases";
 
 type FilaHorarioProps = {
   fila: FilaPresentada;
@@ -6,9 +7,9 @@ type FilaHorarioProps = {
 
 export function FilaHorario({ fila }: FilaHorarioProps) {
   return (
-    <li className="flex items-baseline justify-between gap-4 border-b border-zinc-800 py-3">
+    <li className="flex items-baseline justify-between gap-4 border-b border-borde py-3">
       <span>{fila.dia}</span>
-      <span className="text-zinc-300">{fila.franja}</span>
+      <span className={claseTextoSuave}>{fila.franja}</span>
     </li>
   );
 }

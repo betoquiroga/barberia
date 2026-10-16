@@ -6,6 +6,7 @@ import type { ValoresFormularioCliente } from "@/components/clientes/formulario-
 import { ListaClientes } from "@/components/clientes/lista-clientes";
 import { MensajeCliente } from "@/components/clientes/mensaje-cliente";
 import { mensajeErrorCliente } from "@/lib/clientes/mensajes-error-cliente";
+import { claseBotonSecundario } from "@/lib/ui/clases";
 import {
   actualizarCliente,
   borrarCliente,
@@ -164,7 +165,7 @@ export function PanelClientes() {
           <MensajeCliente tipo="error" texto={errorCarga} />
           <button
             type="button"
-            className="rounded border border-zinc-700 px-3 py-1 text-sm"
+            className={claseBotonSecundario}
             onClick={() => {
               void cargar();
             }}

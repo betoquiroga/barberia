@@ -1,3 +1,5 @@
+import { claseCampo, claseError } from "@/lib/ui/clases";
+
 type CampoReservaProps = {
   id: string;
   etiqueta: string;
@@ -19,9 +21,6 @@ type CampoReservaProps = {
     }
 );
 
-const clase =
-  "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-50 disabled:bg-zinc-800 disabled:opacity-50";
-
 export function CampoReserva(props: CampoReservaProps) {
   return (
     <div className="flex flex-col gap-1">
@@ -31,7 +30,7 @@ export function CampoReserva(props: CampoReservaProps) {
           <textarea
             id={props.id}
             name={props.id}
-            className={clase}
+            className={claseCampo}
             maxLength={props.maxLength}
             rows={props.rows}
             value={props.valor}
@@ -42,7 +41,7 @@ export function CampoReserva(props: CampoReservaProps) {
           <input
             id={props.id}
             name={props.id}
-            className={clase}
+            className={claseCampo}
             type={props.type}
             required={props.required}
             maxLength={props.maxLength}
@@ -53,7 +52,7 @@ export function CampoReserva(props: CampoReservaProps) {
         )}
       </label>
       {props.error ? (
-        <p className="text-sm text-red-300">{props.error}</p>
+        <p className={claseError}>{props.error}</p>
       ) : null}
     </div>
   );

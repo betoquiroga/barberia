@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { PanelBarbero } from "@/components/desempeno/panel-barbero";
+import { clasePagina } from "@/lib/ui/clases";
 
 type PaginaBarberoProps = {
   params: Promise<{ barberoId: string }>;
@@ -11,7 +12,7 @@ export default function PaginaBarbero({
   searchParams,
 }: PaginaBarberoProps) {
   return (
-    <main className="min-h-dvh bg-zinc-950 text-zinc-50">
+    <main className={clasePagina}>
       <div className="mx-auto max-w-3xl px-4 py-8">
         <Suspense fallback={<p>Cargando desempeño…</p>}>
           <ContenidoBarbero params={params} searchParams={searchParams} />

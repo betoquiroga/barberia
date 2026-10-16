@@ -1,5 +1,6 @@
 import { FilaHorario } from "@/components/landing/fila-horario";
 import { presentarHorarios } from "@/lib/landing/presentar-horarios";
+import { claseTextoSuave } from "@/lib/ui/clases";
 import type { ResultadoHorarios } from "@/types/horario";
 
 type SeccionHorariosProps = {
@@ -17,11 +18,11 @@ export function SeccionHorarios({ resultado }: SeccionHorariosProps) {
 
 function contenido(resultado: ResultadoHorarios) {
   if (!resultado.ok) {
-    return <p className="mt-6 text-zinc-300">No pudimos cargar el horario</p>;
+    return <p className={`mt-6 ${claseTextoSuave}`}>No pudimos cargar el horario</p>;
   }
 
   if (resultado.horarios.length === 0) {
-    return <p className="mt-6 text-zinc-300">Horario por confirmar</p>;
+    return <p className={`mt-6 ${claseTextoSuave}`}>Horario por confirmar</p>;
   }
 
   const filas = presentarHorarios(resultado.horarios);

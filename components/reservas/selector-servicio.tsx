@@ -1,3 +1,4 @@
+import { claseCampo, claseError } from "@/lib/ui/clases";
 import type { Servicio } from "@/types/servicio";
 
 type SelectorServicioProps = {
@@ -7,9 +8,6 @@ type SelectorServicioProps = {
   deshabilitado: boolean;
   onChange: (valor: string) => void;
 };
-
-const clase =
-  "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-50 disabled:bg-zinc-800 disabled:opacity-50";
 
 export function SelectorServicio({
   servicios,
@@ -25,7 +23,7 @@ export function SelectorServicio({
         <select
           id="reserva-servicio"
           name="servicioId"
-          className={clase}
+          className={claseCampo}
           required
           value={valor}
           disabled={deshabilitado}
@@ -39,7 +37,7 @@ export function SelectorServicio({
           ))}
         </select>
       </label>
-      {error ? <p className="text-sm text-red-300">{error}</p> : null}
+      {error ? <p className={claseError}>{error}</p> : null}
     </div>
   );
 }

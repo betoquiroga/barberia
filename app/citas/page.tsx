@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import { PanelCitas } from "@/components/citas/panel-citas";
+import { clasePagina } from "@/lib/ui/clases";
 
 type PaginaCitasProps = {
   searchParams: Promise<{ mes?: string | string[] }>;
@@ -7,7 +8,7 @@ type PaginaCitasProps = {
 
 export default function PaginaCitas({ searchParams }: PaginaCitasProps) {
   return (
-    <main className="min-h-dvh bg-zinc-950 text-zinc-50">
+    <main className={clasePagina}>
       <div className="mx-auto max-w-3xl px-4 py-8">
         <Suspense fallback={<p>Cargando citas…</p>}>
           <ContenidoCitas searchParams={searchParams} />

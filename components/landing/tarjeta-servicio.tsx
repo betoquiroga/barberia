@@ -1,4 +1,5 @@
 import { PrecioServicio } from "@/components/landing/precio-servicio";
+import { claseTarjeta, claseTextoSuave } from "@/lib/ui/clases";
 import type { Servicio } from "@/types/servicio";
 
 type TarjetaServicioProps = {
@@ -7,9 +8,9 @@ type TarjetaServicioProps = {
 
 export function TarjetaServicio({ servicio }: TarjetaServicioProps) {
   return (
-    <article className="rounded-lg border border-zinc-800 p-4">
+    <article className={claseTarjeta}>
       <h3 className="text-lg font-medium">{servicio.nombre}</h3>
-      <p className="mt-2 text-zinc-300">{servicio.descripcion}</p>
+      <p className={`mt-2 ${claseTextoSuave}`}>{servicio.descripcion}</p>
       <PrecioServicio precio={servicio.precio} />
     </article>
   );

@@ -1,6 +1,7 @@
 import { FilaBarra } from "@/components/citas/fila-barra";
 import { claseBarra } from "@/lib/citas/clase-barra";
 import { presentarFecha } from "@/lib/citas/presentar-eje";
+import { claseBarraDia } from "@/lib/ui/clases";
 import type { DiaCitas } from "@/types/citas-diagrama";
 
 type DiagramaDiasProps = {
@@ -23,7 +24,7 @@ export function DiagramaDias({ dias }: DiagramaDiasProps) {
               etiqueta={presentarFecha(dia.fecha)}
               cantidad={dia.cantidad}
               ancho={claseBarra(dia.cantidad, maximo)}
-              color="bg-zinc-200"
+              color={claseBarraDia}
             />
           </li>
         ))}

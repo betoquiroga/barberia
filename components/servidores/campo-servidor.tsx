@@ -1,3 +1,5 @@
+import { claseCampo } from "@/lib/ui/clases";
+
 type CampoServidorProps = {
   id: string;
   etiqueta: string;
@@ -8,9 +10,6 @@ type CampoServidorProps = {
   deshabilitado: boolean;
   onChange: (valor: string) => void;
 };
-
-const clase =
-  "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-50 disabled:bg-zinc-800 disabled:opacity-50";
 
 export function CampoServidor({
   id,
@@ -28,7 +27,7 @@ export function CampoServidor({
       <input
         id={id}
         name={id}
-        className={clase}
+        className={claseCampo}
         type={type}
         required={required}
         maxLength={maxLength}

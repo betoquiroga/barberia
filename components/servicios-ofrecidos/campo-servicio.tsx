@@ -1,3 +1,5 @@
+import { claseCampo } from "@/lib/ui/clases";
+
 type CampoServicioProps = {
   id: string;
   etiqueta: string;
@@ -11,9 +13,6 @@ type CampoServicioProps = {
   min?: number;
   step?: number;
 };
-
-const clase =
-  "w-full rounded border border-zinc-700 bg-zinc-900 px-3 py-2 text-sm text-zinc-50 disabled:bg-zinc-800 disabled:opacity-50";
 
 export function CampoServicio({
   id,
@@ -34,7 +33,7 @@ export function CampoServicio({
       <input
         id={id}
         name={id}
-        className={clase}
+        className={claseCampo}
         type={type}
         required={required}
         value={valor}
